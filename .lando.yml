@@ -1,0 +1,32 @@
+name: perform
+recipe: laravel
+config:
+  webroot: public
+  database: mariadb
+  cache: redis
+  php: '8.2'
+services:
+  appserver:
+    type: 'php:8.2'
+tooling:
+  migrate-fresh:
+    service: appserver
+    description: Clean install of database
+    cmd: php artisan migrate:fresh
+  cc:
+    service: appserver
+    description: Clear all
+    cmd: |
+      php artisan cache:clear
+      php artisan config:clear
+      php artisan view:clear
+      php artisan route:clear
+      composer dumpauto
+  ide-helper:
+    service: appserver
+    description: Regenerate ide-helper files
+    cmd: |
+      php artisan clear-compiled
+      php artisan ide-helper:generate
+      php artisan ide-helper:models --write-mixin
+      php artisan ide-helper:meta
