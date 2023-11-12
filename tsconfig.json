@@ -1,0 +1,10 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.json",
+    "target": "esnext",
+    "include": ["./resources/js/**/*"],
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./resources/js/*"]
+        }
+    }
+}
