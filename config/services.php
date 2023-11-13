@@ -34,14 +34,15 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI')
+        'redirect' => env('GOOGLE_REDIRECT_URI', 'auth/google/callback'),
     ],
 
     'microsoft' => [
         'client_id' => env('MICROSOFT_CLIENT_ID'),
         'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
-        'redirect' => env('MICROSOFT_REDIRECT_URI'),
+        'redirect' => env('MICROSOFT_REDIRECT_URI', 'auth/microsoft/callback'),
         'tenant' => 'common',
-        'include_tenant_info' => true,
+        'scope' => 'email profile',
+//        'include_tenant_info' => true,
     ],
 ];

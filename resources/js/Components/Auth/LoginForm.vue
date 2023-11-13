@@ -28,8 +28,26 @@ const submit = () => {
 </script>
 <template>
     <div>
-        <h2 class="mb-4 text-center text-3xl font-bold text-brand-blue uppercase tracking-widest">Login</h2>
 
+        <div class="flex">
+            <a
+                :href="route('auth.provider.redirect', 'google')"
+                class="hover:underline tracking-widest uppercase font-medium text-brand-blue"
+            >
+                Login con Google
+            </a>
+
+            <a
+                :href="route('auth.provider.redirect', 'microsoft')"
+                class="hover:underline tracking-widest uppercase font-medium text-brand-blue"
+            >
+                Login con Microsoft
+            </a>
+
+        </div>
+
+
+        <h2 class="mb-4 text-center text-3xl font-bold text-brand-blue uppercase tracking-widest">Login</h2>
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>

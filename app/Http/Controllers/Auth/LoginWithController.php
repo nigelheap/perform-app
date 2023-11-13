@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -34,13 +36,25 @@ class LoginWithController extends Controller
     {
         abort_unless(in_array($provider, $this->providers), 403);
 
-        $providerUser = Socialite::driver($provider)->user();
 
-        $user = User::updateOrCreate([
-            $provider . '_id' => $providerUser->id,
+
+        try {
+            $providerUser = Socialite::driver($provider)->user();
+        } catch (\Throwable $exception){
+            session()->flash('error', 'Login error');
+
+            return redirect()->route('login');
+        }
+
+        $user = User::firstOrCreate([
+            'email' => $providerUser->email,
         ], [
             'name' => $providerUser->name,
-            'email' => $providerUser->email,
+            'password' => Hash::make(Str::uuid())
+        ]);
+
+        $user->update([
+            $provider . '_id' => $providerUser->id,
             $provider . '_token' => $providerUser->token,
             $provider . '_refresh_token' => $providerUser->refreshToken,
         ]);
