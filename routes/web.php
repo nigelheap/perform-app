@@ -17,9 +17,38 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::group([
+    'middleware' => ['auth', 'verified']
+], function () {
+
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('class-sessions', \App\Http\Controllers\ClassSessionsController::class);
+
+    Route::group([
+        'prefix' => 'class-sessions/{class_session}',
+        'as' => 'posts.'
+    ], function () {
+
+        Route::controller(\App\Http\Controllers\PostsController::class)
+            ->group(function(){
+                Route::get('/posts', 'all')->name('all');
+                Route::get('/posts/{type}', 'index')->name('index');
+                Route::get('/posts/{type}/create', 'create')->name('create');
+                Route::post('/posts/{type}', 'store')->name('store');
+
+                Route::get('/posts/{post}', 'show')->name('show');
+                Route::get('/posts/{post}/edit', 'edit')->name('edit');
+                Route::match(['patch', 'put'], '/posts/{post}', 'update')->name('update');
+                Route::delete('/posts/{post}', 'delete')->name('delete');
+            });
+    });
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

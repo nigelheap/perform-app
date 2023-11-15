@@ -4,6 +4,8 @@ import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import InputError from "@/Components/Form/InputError.vue";
 import {Link, useForm} from "@inertiajs/vue3";
 import InputLabel from "@/Components/Form/InputLabel.vue";
+import LoginWithGoogle from "@/Components/Buttons/LoginWithGoogle.vue";
+import LoginWithMicrosoft from "@/Components/Buttons/LoginWithMicrosoft.vue";
 
 defineProps({
     canResetPassword: {
@@ -29,23 +31,10 @@ const submit = () => {
 <template>
     <div>
 
-        <div class="flex">
-            <a
-                :href="route('auth.provider.redirect', 'google')"
-                class="hover:underline tracking-widest uppercase font-medium text-brand-blue"
-            >
-                Login con Google
-            </a>
-
-            <a
-                :href="route('auth.provider.redirect', 'microsoft')"
-                class="hover:underline tracking-widest uppercase font-medium text-brand-blue"
-            >
-                Login con Microsoft
-            </a>
-
+        <div class="flex flex-col gap-4 mb-8">
+            <LoginWithGoogle :href="route('auth.provider.redirect', 'google')" />
+            <LoginWithMicrosoft :href="route('auth.provider.redirect', 'microsoft')" />
         </div>
-
 
         <h2 class="mb-4 text-center text-3xl font-bold text-brand-blue uppercase tracking-widest">Login</h2>
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">

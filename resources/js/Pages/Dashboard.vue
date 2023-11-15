@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+
+defineProps({ classSessions: Array })
 </script>
 
 <template>
@@ -12,11 +14,19 @@ import { Head } from '@inertiajs/vue3';
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
-                </div>
-            </div>
+            <ul class="flex flex-row gap-4 justify-stretch shadow mb-4">
+                <li v-for="classSession in classSessions" class="w-full">
+                    <Link :href="route('class-sessions.show', classSession.id)"
+                             class="p-4 block bg-white rounded-lg">
+                        {{ classSession.name }}
+                    </Link>
+                </li>
+            </ul>
+
+            <Link class="underline" :href="route('class-sessions.create')">
+                Agregar sesión de clase
+            </Link>
         </div>
+
     </AuthenticatedLayout>
 </template>

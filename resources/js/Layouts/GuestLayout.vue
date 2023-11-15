@@ -17,7 +17,11 @@ import WriteIcon from "@/Components/Icons/WriteIcon.vue";
 
         <div class="container">
             <ul class="grid grid-cols-2 sm:grid-cols-4 gap-8">
-                <li class="p-4"><CameraIcon /></li>
+                <li class="p-4">
+                    <Link :href="route('posts.create', 'camera')">
+                        <CameraIcon />
+                    </Link>
+                </li>
                 <li class="p-4"><WriteIcon /></li>
                 <li class="p-4"><AudioIcon /></li>
                 <li class="p-4"><PinIcon /></li>
