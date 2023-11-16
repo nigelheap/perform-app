@@ -11,11 +11,6 @@ import HeaderAuthed from "@/Components/HeaderAuthed.vue";
 
             <HeaderAuthed />
 
-            <div class="container mb-8">
-                <Link href="/">
-                    <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-                </Link>
-            </div>
 
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">
