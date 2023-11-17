@@ -14,11 +14,16 @@ defineProps({ classSessions: Array })
         </template>
 
         <div class="py-12">
-            <ul class="flex flex-row gap-4 justify-stretch shadow mb-4">
+            <ul class="flex flex-row gap-4 justify-stretch mb-4">
                 <li v-for="classSession in classSessions" class="w-full">
                     <Link :href="route('class-sessions.show', classSession.id)"
-                             class="p-4 block bg-white rounded-lg">
-                        {{ classSession.name }}
+                             class="p-4 block bg-white hover:bg-strong-100 rounded-md shadow">
+                        <div>{{ classSession.name }}</div>
+                        <div class="flex justify-end">
+                            <div class="bg-stone-200 px-2 py-1 text-sm rounded-full">
+                                {{ $date(classSession.created_at).fromNow() }}
+                            </div>
+                        </div>
                     </Link>
                 </li>
             </ul>

@@ -9,7 +9,7 @@ import {Link} from "@inertiajs/vue3";
 const showingNavigationDropdown = ref(false);
 </script>
 <template>
-    <div class="container">
+    <div class="md:container pl-2 md:pl-0 pr-4 md:pr-4">
         <nav class="mb-4">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto md:px-6 lg:px-8">
@@ -23,7 +23,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
                     </div>
 
-                    <div class="hidden lg:flex lg:items-center md:ms-6">
+                    <div class="hidden lg:flex lg:items-center lg:ms-6">
                         <!-- Settings Dropdown -->
                         <div class="ms-3 relative">
                             <Dropdown align="right" width="48">
@@ -91,7 +91,7 @@ const showingNavigationDropdown = ref(false);
                         </button>
                     </div>
 
-                    <div class="pl-8 max-w-[320px]">
+                    <div class="pl-8 max-w-[320px] lg:hidden">
                         <!-- Logo -->
                         <Link :href="route('dashboard')">
                             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />

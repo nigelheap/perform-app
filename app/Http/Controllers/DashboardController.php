@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $classSessions = ClassSession::query()
             ->whereNull('expire_at')
             ->orWhere('expire_at', '>', now())
+            ->with('user')
             ->get();
 
         return Inertia::render('Dashboard', [
