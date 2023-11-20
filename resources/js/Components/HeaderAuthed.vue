@@ -9,10 +9,10 @@ import {Link} from "@inertiajs/vue3";
 const showingNavigationDropdown = ref(false);
 </script>
 <template>
-    <div class="md:container pl-2 md:pl-0 pr-4 md:pr-4">
+    <div class="md:container pl-4 lg:pl-4 pr-4 lg:pr-4">
         <nav class="mb-4">
             <!-- Primary Navigation Menu -->
-            <div class="max-w-7xl mx-auto md:px-6 lg:px-8">
+            <div class="mx-auto ">
                 <div class="flex justify-between items-center h-16">
                     <div class="hidden lg:flex">
                         <!-- Navigation Links -->

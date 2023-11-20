@@ -30,7 +30,6 @@ const submit = () => {
             <TextInput
                 id="register-name"
                 type="text"
-                color="orange"
                 class="mt-1 block w-full"
                 v-model="form.name"
                 placeholder="Nombre Completo"
@@ -48,7 +47,6 @@ const submit = () => {
             <TextInput
                 id="register-email"
                 type="email"
-                color="orange"
                 class="mt-1 block w-full"
                 v-model="form.email"
                 placeholder="Correo"
@@ -65,7 +63,6 @@ const submit = () => {
             <TextInput
                 id="register-password"
                 type="password"
-                color="orange"
                 class="mt-1 block w-full"
                 v-model="form.password"
                 placeholder="Clave"
@@ -82,7 +79,6 @@ const submit = () => {
             <TextInput
                 id="register-password-confirmation"
                 type="password"
-                color="orange"
                 class="mt-1 block w-full"
                 v-model="form.password_confirmation"
                 placeholder="Confirmar clave"
@@ -93,7 +89,7 @@ const submit = () => {
             <InputError class="mt-2" :message="form.errors.password_confirmation" />
         </div>
 
-        <div class="flex items-center justify-stretch mt-4">
+        <div class="flex items-center justify-stretch mt-8">
             <SecondaryButton
                 type="submit"
                 :class="{ 'opacity-25': form.processing }"

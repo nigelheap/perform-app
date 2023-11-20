@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import Recorder from "@/Components/Recorder.vue";
 
 defineProps({ classSessions: Array })
 </script>
@@ -13,7 +14,6 @@ defineProps({ classSessions: Array })
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Fotos</h2>
         </template>
 
-
-
+        <Recorder />
     </AuthenticatedLayout>
 </template>

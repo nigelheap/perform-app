@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Models\ClassSession;
+use App\Models\Curso;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use Inertia\Response;
 class PostsController extends Controller
 {
 
-    public function all(ClassSession $classSession, Request $request)
+    public function all(Curso $classSession, Request $request)
     {
         return Inertia::render('Posts', [
             'posts' => $classSession->posts()->get(),
@@ -22,12 +22,12 @@ class PostsController extends Controller
     }
 
     /**
-     * @param ClassSession $classSession
+     * @param Curso $classSession
      * @param string $type
      * @param Request $request
      * @return Response
      */
-    public function index(ClassSession $classSession, string $type, Request $request)
+    public function index(Curso $classSession, string $type, Request $request)
     {
         $this->validateType($type);
 
@@ -44,12 +44,12 @@ class PostsController extends Controller
 
 
     /**
-     * @param ClassSession $classSession
+     * @param Curso $classSession
      * @param string $type
      * @param Request $request
      * @return Response
      */
-    public function create(ClassSession $classSession, string $type, Request $request)
+    public function create(Curso $classSession, string $type, Request $request)
     {
         $this->validateType($type);
 
@@ -60,12 +60,12 @@ class PostsController extends Controller
 
 
     /**
-     * @param ClassSession $classSession
+     * @param Curso $classSession
      * @param string $type
      * @param PostRequest $request
      * @return Response
      */
-    public function store(ClassSession $classSession, string $type, PostRequest $request)
+    public function store(Curso $classSession, string $type, PostRequest $request)
     {
         $this->validateType($type);
 
@@ -81,12 +81,12 @@ class PostsController extends Controller
     }
 
     /**
-     * @param ClassSession $classSession
+     * @param Curso $classSession
      * @param Post $post
      * @param PostRequest $request
      * @return RedirectResponse
      */
-    public function update(ClassSession $classSession, Post $post, PostRequest $request)
+    public function update(Curso $classSession, Post $post, PostRequest $request)
     {
         $post->update($request->validated());
 
@@ -95,16 +95,16 @@ class PostsController extends Controller
 
 
     /**
-     * @param ClassSession $classSession
+     * @param Curso $cursos
      * @param Post $post
      * @param Request $request
      * @return RedirectResponse
      */
-    public function delete(ClassSession $classSession, Post $post, Request $request)
+    public function delete(Curso $cursos, Post $post, Request $request)
     {
         $post->delete();
 
-        return to_route('class-sessions.show', $classSession);
+        return to_route('cursos.show', $cursos);
     }
 
 

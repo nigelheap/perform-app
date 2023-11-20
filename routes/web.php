@@ -27,10 +27,10 @@ Route::group([
     })->name('dashboard');
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('class-sessions', \App\Http\Controllers\ClassSessionsController::class);
+    Route::resource('cursos', \App\Http\Controllers\CursosController::class);
 
     Route::group([
-        'prefix' => 'class-sessions/{class_session}',
+        'prefix' => 'cursos/{curso}',
         'as' => 'posts.'
     ], function () {
 

@@ -7,7 +7,8 @@ defineProps({
         required: true,
     },
     color:{
-
+        type: String,
+        default: 'normal',
     }
 });
 
@@ -28,11 +29,12 @@ defineExpose({ focus: () => input.value.focus() });
 
 <template>
     <input
-        class="rounded-md shadow-sm"
+        class=" "
         :class="{
             'border-none bg-brand-orange text-white autofill:bg-brand-orange autofill:text-white placeholder:font-bold placeholder:tracking-widest placeholder:uppercase placeholder:text-center placeholder:text-white focus:ring-offset-2 focus:ring-2 focus:border-brand-orange focus:ring-brand-orange' : color === 'orange',
             'border-none bg-brand-blue text-white autofill:bg-brand-blue autofill:text-white placeholder:font-bold placeholder:tracking-widest placeholder:uppercase placeholder:text-center placeholder:text-white focus:ring-offset-2 focus:ring-2 focus:border-brand-blue focus:ring-brand-blue' : color === 'blue',
-            'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' : !['blue', 'orange'].includes(color),
+            'shadow-sm rounded-md border border-stone-300 focus:ring-2 focus:border-brand-orange focus:ring-brand-orange ' : color === 'basic',
+            'border-0 bg-brand-background border-b border-stone-700 text-stone-900 focus:ring-0 focus:border-brand-orange focus:ring-brand-orange ' : color === 'normal',
         }"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"

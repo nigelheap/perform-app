@@ -23,15 +23,15 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Post> $posts
  * @property-read int|null $posts_count
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession query()
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereExpireAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ClassSession whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereExpireAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Curso whereUserId($value)
  * @mixin \Eloquent
  */
 	class IdeHelperClassSession {}
@@ -48,7 +48,7 @@ namespace App\Models{
  * @property string $title
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\ClassSession|null $classSession
+ * @property-read \App\Models\Curso|null $classSession
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()

@@ -32,8 +32,8 @@ class Post extends Model
     /**
      * @return BelongsTo
      */
-    public function classSession(): BelongsTo
+    public function cursos(): BelongsTo
     {
-        return $this->belongsTo(ClassSession::class);
+        return $this->belongsTo(Curso::class);
     }
 }

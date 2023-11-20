@@ -31,7 +31,7 @@ const submit = () => {
 <template>
     <div>
 
-        <div class="flex flex-col gap-4 mb-8">
+        <div class="flex gap-4 mb-8">
             <LoginWithGoogle :href="route('auth.provider.redirect', 'google')" />
             <LoginWithMicrosoft :href="route('auth.provider.redirect', 'microsoft')" />
         </div>
@@ -48,13 +48,12 @@ const submit = () => {
                 <TextInput
                     id="email"
                     type="email"
-                    color="blue"
                     class="mt-1 block w-full"
                     v-model="form.email"
                     placeholder="Correo"
                     required
                     autofocus
-                    autocomplete="username"
+                    autocomplete="one-time-code"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -66,12 +65,11 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    color="blue"
                     class="mt-1 block w-full"
                     v-model="form.password"
                     placeholder="Clave"
                     required
-                    autocomplete="current-password"
+                    autocomplete="one-time-code"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -90,7 +88,6 @@ const submit = () => {
             <div class="flex items-center justify-stretch mt-4">
 
                 <PrimaryButton
-
                     type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing">

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @mixin IdeHelperClassSession
  */
-class ClassSession extends Model
+class Curso extends Model
 {
     use HasFactory;
 
