@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
@@ -51,4 +52,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function cursos(): BelongsToMany
+    {
+        return $this->belongsToMany(Curso::class);
+    }
 }

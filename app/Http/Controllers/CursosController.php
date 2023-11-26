@@ -58,9 +58,10 @@ class CursosController extends Controller
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
         $data['expire_at'] = now()->addWeekdays(14);
-        $cursos = Curso::create($data);
+        $curso = Curso::create($data);
+        $curso->users()->attach($request->user()->id);
 
-        return to_route('cursos.show', $cursos);
+        return to_route('cursos.show', $curso);
     }
 
 
@@ -93,14 +94,24 @@ class CursosController extends Controller
 
     /**
      * @param Curso $curso
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function join(Curso $curso, Request $request)
+    {
+        $curso->users()->attach($request->user()->id);
+
+        return to_route('cursos.show', $curso);
+    }
+
+
+    /**
+     * @param Curso $curso
      * @param CursoRequest $request
      * @return RedirectResponse
      */
     public function delete(Curso $curso, CursoRequest $request)
     {
-
-
-
         return to_route('dashboard');
     }
 

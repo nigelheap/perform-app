@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -13,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Curso extends Model
 {
     use HasFactory;
-
 
     protected $fillable = [
         'user_id',
@@ -26,12 +27,25 @@ class Curso extends Model
         'expire_at' => 'datetime',
     ];
 
+
+    protected $appends = [
+        'joined'
+    ];
+
     /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 
     /**
@@ -40,5 +54,18 @@ class Curso extends Model
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+
+    /**
+     * Interact with the user's address.
+     */
+    protected function joined(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->users()
+                ->where('curso_id', $attributes['id'])
+                ->exists(),
+        );
     }
 }

@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 
 defineProps({ cursos: Array })
 </script>
@@ -16,22 +18,39 @@ defineProps({ cursos: Array })
         <div class="py-12">
             <ul class="flex flex-row gap-4 justify-stretch mb-4">
                 <li v-for="curso in cursos" class="w-full">
-                    <Link :href="route('cursos.show', curso.id)"
-                             class="p-4 block bg-white hover:bg-strong-100 rounded-md shadow">
-                        <div>{{ curso.name }}</div>
-                        <div>{{ curso.user.name }}</div>
-                        <div class="flex justify-end">
-                            <div class="bg-stone-200 px-2 py-1 text-sm rounded-full">
-                                {{ $date(curso.created_at).fromNow() }}
+                    <div class="p-4 block bg-white hover:bg-strong-100 rounded-md shadow relative">
+
+                        <div class="flex justify-between">
+                            <div class="space-y-2">
+                                <h3 class="font-bold">{{ curso.name }}</h3>
+                                <div>{{ curso.owner.name }}</div>
+                                <div class="bg-stone-200 px-2 py-1 text-sm rounded-full">
+                                    {{ $date(curso.created_at).fromNow() }}
+                                </div>
+                            </div>
+
+                            <div>
+
+
+                                <div class="flex justify-end" v-if="!curso.joined">
+                                    <SecondaryButton
+                                        :href="route('cursos.join', curso.id)"
+                                        type="link">Unirse</SecondaryButton>
+                                </div>
                             </div>
                         </div>
-                    </Link>
+                        <Link :href="route('cursos.show', curso.id)"
+                              v-if="curso.joined"
+                              class="absolute inset-0"></Link>
+
+
+                    </div>
                 </li>
             </ul>
 
-            <Link class="underline" :href="route('cursos.create')">
+            <PrimaryButton type="link" class="underline" :href="route('cursos.create')">
                 Agregar curso
-            </Link>
+            </PrimaryButton>
         </div>
 
     </AuthenticatedLayout>

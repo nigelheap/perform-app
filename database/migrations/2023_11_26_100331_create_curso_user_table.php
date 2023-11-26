@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('class_session_id');
+        Schema::create('curso_user', function (Blueprint $table) {
+            $table->uuid('curso_id');
             $table->uuid('user_id');
-            $table->string('type');
-            $table->string('title');
-            $table->text('description');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->primary(['curso_id', 'user_id']);
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('curso_user');
     }
 };
