@@ -22,11 +22,9 @@ class DashboardController extends Controller
         $cursos = Curso::query()
             ->whereNull('expire_at')
             ->orWhere('expire_at', '>', now())
-            ->with(['owner' => function (BelongsTo $query) {
-                    $query->select(['id', 'name']);
-                }, 'users' => function (BelongsToMany $query) {
-                    $query->select(['id', 'name']);
-                }])
+            ->with(['users' => function (BelongsToMany $query) {
+                $query->select(['id', 'name']);
+            }])
             ->get();
 
         return Inertia::render('Dashboard', [

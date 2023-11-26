@@ -30,8 +30,11 @@ defineProps({ cursos: Array })
                             </div>
 
                             <div>
-
-
+                                <ul class="" v-if="curso.users && curso.users.length > 0">
+                                    <li v-for="user in curso.users">
+                                        <Avatar :name="user.name"></Avatar>
+                                    </li>
+                                </ul>
                                 <div class="flex justify-end" v-if="!curso.joined">
                                     <SecondaryButton
                                         :href="route('cursos.join', curso.id)"

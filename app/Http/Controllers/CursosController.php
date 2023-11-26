@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enumeration\CursoUserRoles;
 use App\Http\Requests\CursoRequest;
 use App\Models\Curso;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,6 @@ class CursosController extends Controller
      */
     public function index()
     {
-
         $class_sessions = Curso::query()
             ->whereNull('expire_at')
             ->orWhere('expire_at', '>', now())
@@ -56,10 +56,11 @@ class CursosController extends Controller
     public function store(CursoRequest $request)
     {
         $data = $request->validated();
-        $data['user_id'] = $request->user()->id;
         $data['expire_at'] = now()->addWeekdays(14);
         $curso = Curso::create($data);
-        $curso->users()->attach($request->user()->id);
+        $curso->users()->attach($request->user()->id, [
+            'role' => CursoUserRoles::OWNER->value
+        ]);
 
         return to_route('cursos.show', $curso);
     }
