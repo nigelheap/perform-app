@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import Avatar from "vue3-avatar";
 
 defineProps({ cursos: Array })
 </script>
@@ -30,7 +31,7 @@ defineProps({ cursos: Array })
                             </div>
 
                             <div>
-                                <ul class="" v-if="curso.users && curso.users.length > 0">
+                                <ul class="mb-4 flex justify-end" v-if="curso.users && curso.users.length > 0">
                                     <li v-for="user in curso.users">
                                         <Avatar :name="user.name"></Avatar>
                                     </li>

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Enumeration\CursoUserRoles;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @mixin IdeHelperClassSession
@@ -29,8 +31,11 @@ class Curso extends Model
 
 
     protected $appends = [
-        'joined'
+        'joined',
+        'owner'
     ];
+
+
 
 
     /**
@@ -58,8 +63,20 @@ class Curso extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $this->users()
-                ->where('curso_id', $attributes['id'])
+                ->where('user_id', Auth::id())
                 ->exists(),
+        );
+    }
+
+    /**
+     * Interact with the user's address.
+     */
+    protected function owner(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $this->users()
+                ->where('role', CursoUserRoles::OWNER->value)
+                ->first(),
         );
     }
 }

@@ -8,7 +8,6 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import dayjs from 'dayjs';
 import "dayjs/locale/es";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Avatar from "vue3-avatar";
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -19,8 +18,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
-            .component('avatar', Avatar);
+            .use(ZiggyVue, Ziggy);
 
         dayjs.locale('es')
         dayjs.extend(relativeTime)
