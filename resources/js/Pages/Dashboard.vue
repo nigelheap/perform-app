@@ -33,7 +33,7 @@ defineProps({ cursos: Array })
                             <div>
                                 <ul class="mb-4 flex justify-end relative" v-if="curso.users && curso.users.length > 0">
                                     <li v-for="user in curso.users" class="-ml-2 relative block">
-                                        <Avatar :name="user.name" :size="40" class="rounded-full shadow block"></Avatar>
+                                        <Avatar :name="user.name" :size="40" class="rounded-full shadow block border border-white"></Avatar>
                                     </li>
                                 </ul>
                                 <div class="flex justify-end" v-if="!curso.joined">
