@@ -3,7 +3,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
-import Avatar from "vue3-avatar";
+import Avatar from "@/Components/icons/Avatar.vue";
+import UserCircle from "@/Components/Icons/UserCircle.vue";
 
 defineProps({ cursos: Array })
 </script>
@@ -12,10 +13,6 @@ defineProps({ cursos: Array })
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
-
         <div class="py-12">
             <ul class="flex flex-row gap-4 justify-stretch mb-4">
                 <li v-for="curso in cursos" class="w-full">
@@ -24,16 +21,19 @@ defineProps({ cursos: Array })
                         <div class="flex justify-between">
                             <div class="space-y-2">
                                 <h3 class="font-bold">{{ curso.name }}</h3>
-                                <div>{{ curso.owner.name }}</div>
+                                <div class="text-stone-500 flex gap-1 mb-2" title="Professor">
+                                    <UserCircle />
+                                    {{ curso.owner.name }}
+                                </div>
                                 <div class="bg-stone-200 px-2 py-1 text-sm rounded-full">
                                     {{ $date(curso.created_at).fromNow() }}
                                 </div>
                             </div>
 
                             <div>
-                                <ul class="mb-4 flex justify-end" v-if="curso.users && curso.users.length > 0">
-                                    <li v-for="user in curso.users">
-                                        <Avatar :name="user.name"></Avatar>
+                                <ul class="mb-4 flex justify-end relative" v-if="curso.users && curso.users.length > 0">
+                                    <li v-for="user in curso.users" class="-ml-2 relative block">
+                                        <Avatar :name="user.name" :size="40" class="rounded-full shadow block"></Avatar>
                                     </li>
                                 </ul>
                                 <div class="flex justify-end" v-if="!curso.joined">
@@ -46,8 +46,6 @@ defineProps({ cursos: Array })
                         <Link :href="route('cursos.show', curso.id)"
                               v-if="curso.joined"
                               class="absolute inset-0"></Link>
-
-
                     </div>
                 </li>
             </ul>
