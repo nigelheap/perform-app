@@ -22,7 +22,7 @@ class PostsController extends Controller
     }
 
     /**
-     * @param Curso $classSession
+     * @param Curso $curso
      * @param string $type
      * @param Request $request
      * @return Response

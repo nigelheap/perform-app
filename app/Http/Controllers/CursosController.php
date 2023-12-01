@@ -35,6 +35,8 @@ class CursosController extends Controller
      */
     public function show(Curso $curso)
     {
+        $curso->load('posts.user');
+
         return Inertia::render('Cursos/Show', [
             'curso' => $curso,
         ]);

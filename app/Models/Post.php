@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,12 +15,22 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'class_session_id',
+        'curso_id',
         'user_id',
         'type',
         'title',
+        'description',
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('latest', function (Builder $builder) {
+            $builder->orderBy('created_at', 'DESC');
+        });
+    }
 
     /**
      * @return BelongsTo

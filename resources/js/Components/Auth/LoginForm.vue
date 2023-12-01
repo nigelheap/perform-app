@@ -48,7 +48,7 @@ const submit = () => {
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full bg-brand-background"
                     v-model="form.email"
                     placeholder="Correo"
                     required
@@ -65,7 +65,7 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full bg-brand-background"
                     v-model="form.password"
                     placeholder="Clave"
                     required

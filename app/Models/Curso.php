@@ -35,9 +35,6 @@ class Curso extends Model
         'owner'
     ];
 
-
-
-
     /**
      * @return BelongsToMany
      */

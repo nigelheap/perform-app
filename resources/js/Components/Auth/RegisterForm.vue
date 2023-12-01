@@ -30,7 +30,7 @@ const submit = () => {
             <TextInput
                 id="register-name"
                 type="text"
-                class="mt-1 block w-full"
+                class="mt-1 block w-full bg-brand-background"
                 v-model="form.name"
                 placeholder="Nombre Completo"
                 required
@@ -47,7 +47,7 @@ const submit = () => {
             <TextInput
                 id="register-email"
                 type="email"
-                class="mt-1 block w-full"
+                class="mt-1 block w-full bg-brand-background"
                 v-model="form.email"
                 placeholder="Correo"
                 required
@@ -63,7 +63,7 @@ const submit = () => {
             <TextInput
                 id="register-password"
                 type="password"
-                class="mt-1 block w-full"
+                class="mt-1 block w-full bg-brand-background"
                 v-model="form.password"
                 placeholder="Clave"
                 required
@@ -79,7 +79,7 @@ const submit = () => {
             <TextInput
                 id="register-password-confirmation"
                 type="password"
-                class="mt-1 block w-full"
+                class="mt-1 block w-full bg-brand-background"
                 v-model="form.password_confirmation"
                 placeholder="Confirmar clave"
                 required

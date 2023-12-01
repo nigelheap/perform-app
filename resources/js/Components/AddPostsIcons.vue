@@ -8,24 +8,24 @@ import { Link } from '@inertiajs/vue3';
 defineProps({ curso: Object })
 </script>
 <template>
-    <div class="container">
+    <div >
         <ul class="grid grid-cols-2 sm:grid-cols-4 gap-8">
-            <li class="p-4">
+            <li class="p-4 border border-transparent hover:border-stone-300 hover:bg-stone-200 rounded-lg">
                 <Link :href="route('posts.create', {type: 'camera', curso: curso.id})">
                     <CameraIcon />
                 </Link>
             </li>
-            <li class="p-4">
+            <li class="p-4 border border-transparent hover:border-stone-300 hover:bg-stone-200 rounded-lg">
                 <Link :href="route('posts.create', {type: 'escribe', curso: curso.id})">
                     <WriteIcon />
                 </Link>
             </li>
-            <li class="p-4">
+            <li class="p-4 border border-transparent hover:border-stone-300 hover:bg-stone-200 rounded-lg">
                 <Link :href="route('posts.create', {type: 'audio', curso: curso.id})">
                     <AudioIcon />
                 </Link>
             </li>
-            <li class="p-4">
+            <li class="p-4 border border-transparent hover:border-stone-300 hover:bg-stone-200 rounded-lg">
                 <Link :href="route('posts.create', {type: 'geo', curso: curso.id})">
                     <PinIcon />
                 </Link>

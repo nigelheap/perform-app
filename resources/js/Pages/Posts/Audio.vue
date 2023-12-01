@@ -13,7 +13,6 @@ defineProps({ classSessions: Array })
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Fotos</h2>
         </template>
-
         <Recorder />
     </AuthenticatedLayout>
 </template>

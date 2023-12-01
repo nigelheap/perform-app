@@ -41,7 +41,7 @@ export default {
             colors: {
                 brand: {
                     background: '#FFFEF9',
-                    blue: '#2B3344',
+                    blue: '#1b2841',
                     orange: '#C18734'
                 }
             },
