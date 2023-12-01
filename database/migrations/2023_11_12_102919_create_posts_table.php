@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('class_session_id');
+            $table->uuid('curso_id');
             $table->uuid('user_id');
             $table->string('type');
             $table->string('title');

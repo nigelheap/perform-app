@@ -15,12 +15,12 @@ defineProps({
 <template>
     <GuestLayout>
         <Head title="Log in o Registrar" />
-        <div class="px-6 py-4 mb-8">
+        <div class="md:px-6 py-4 mb-8">
             <LoginForm
                 :can-reset-password="canResetPassword"
                 :status="status" />
         </div>
-        <div class="px-6 py-4 mb-8">
+        <div class="md:px-6 py-4 mb-8">
             <RegisterForm />
         </div>
     </GuestLayout>

@@ -31,7 +31,7 @@ const submit = () => {
 <template>
     <div>
 
-        <div class="flex gap-4 mb-8">
+        <div class="flex flex-col lg:flex-row gap-4 mb-8">
             <LoginWithGoogle :href="route('auth.provider.redirect', 'google')" />
             <LoginWithMicrosoft :href="route('auth.provider.redirect', 'microsoft')" />
         </div>

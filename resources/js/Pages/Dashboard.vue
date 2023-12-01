@@ -14,9 +14,9 @@ defineProps({ cursos: Array })
 
     <AuthenticatedLayout>
         <div class="py-12">
-            <ul class="flex flex-row gap-4 justify-stretch mb-4">
-                <li v-for="curso in cursos" class="w-full">
-                    <div class="p-4 block bg-white hover:bg-strong-100 rounded-md shadow relative">
+            <ul class="flex flex-col gap-4 justify-stretch mb-4">
+                <li v-for="curso in cursos" class="w-full bg-white hover:bg-stone-100 rounded-md shadow">
+                    <div class="p-4 block relative">
 
                         <div class="flex justify-between">
                             <div class="space-y-2">

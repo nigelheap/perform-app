@@ -7,9 +7,6 @@ import TextInput from '@/Components/Form/TextInput.vue';
 import {Link, useForm} from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-const passwordInput = ref(null);
-const currentPasswordInput = ref(null);
-
 const form = useForm({
     name: '',
     expire_at: null,
@@ -18,7 +15,7 @@ const form = useForm({
 defineProps({ classSession: Object })
 
 const submit = () => {
-    form.post(route('class-sessions.store'));
+    form.post(route('cursos.store'));
 };
 
 </script>

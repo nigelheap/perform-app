@@ -23,8 +23,14 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => 'required',
         ];
+
+        if($this->route('type') === 'escribe'){
+            $rules['description'] = 'required';
+        }
+
+        return $rules;
     }
 }

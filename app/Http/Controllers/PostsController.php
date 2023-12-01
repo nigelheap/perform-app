@@ -27,57 +27,56 @@ class PostsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function index(Curso $classSession, string $type, Request $request)
+    public function index(Curso $curso, string $type, Request $request)
     {
         $this->validateType($type);
 
-        $posts = $classSession
+        $posts = $curso
             ->posts()
-            ->where('type')
+            ->where('type', $type)
             ->get();
 
         return Inertia::render('Posts/' . ucfirst($type), [
             'posts' => $posts,
-            'classSession' => $classSession,
+            'curso' => $curso,
         ]);
     }
 
 
     /**
-     * @param Curso $classSession
+     * @param Curso $curso
      * @param string $type
      * @param Request $request
      * @return Response
      */
-    public function create(Curso $classSession, string $type, Request $request)
+    public function create(Curso $curso, string $type, Request $request)
     {
         $this->validateType($type);
 
         return Inertia::render('Posts/' . ucfirst($type), [
-            'classSession' => $classSession,
+            'curso' => $curso,
+            'type' => $type,
         ]);
     }
 
 
     /**
-     * @param Curso $classSession
+     * @param Curso $curso
      * @param string $type
      * @param PostRequest $request
      * @return Response
      */
-    public function store(Curso $classSession, string $type, PostRequest $request)
+    public function store(Curso $curso, string $type, PostRequest $request)
     {
         $this->validateType($type);
 
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
-        $data['class_session_id'] = $classSession->id;
+        $data['type'] = $type;
 
-        $classSession->posts()->create();
+        $curso->posts()->create($data);
 
-        return Inertia::render('Posts/' . ucfirst($type), [
-            'classSession' => $classSession,
-        ]);
+        return to_route('cursos.show', $curso);
     }
 
     /**
