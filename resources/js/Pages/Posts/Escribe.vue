@@ -6,6 +6,7 @@ import InputError from "@/Components/Form/InputError.vue";
 import InputLabel from "@/Components/Form/InputLabel.vue";
 import TextInput from "@/Components/Form/TextInput.vue";
 import TextArea from "@/Components/Form/TextArea.vue";
+import BackToCurso from "@/Components/BackToCurso.vue";
 
 const props = defineProps({
     curso: Object,
@@ -34,6 +35,8 @@ const submit = () => {
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Escribir</h2>
         </template>
+
+        <BackToCurso :curso="curso" />
 
         <form @submit.prevent="submit" class="bg-white p-4 rounded shadow">
             <div>
@@ -65,7 +68,7 @@ const submit = () => {
                     autocomplete="current-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.expire_at" />
+                <InputError class="mt-2" :message="form.errors.description" />
             </div>
 
 

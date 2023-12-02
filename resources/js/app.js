@@ -10,7 +10,6 @@ import "dayjs/locale/es";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 
-
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
