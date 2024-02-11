@@ -57,8 +57,10 @@ class CursosController extends Controller
      */
     public function store(CursoRequest $request)
     {
+
         $data = $request->validated();
         $data['expire_at'] = now()->addWeekdays(14);
+        $data['user_id'] = $request->user()->id;
         $curso = Curso::create($data);
         $curso->users()->attach($request->user()->id, [
             'role' => CursoUserRoles::OWNER->value

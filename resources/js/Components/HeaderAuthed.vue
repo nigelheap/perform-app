@@ -52,6 +52,7 @@ const showingNavigationDropdown = ref(false);
 
                                 <template #content>
                                     <DropdownLink :href="route('profile.edit')"> Perfil </DropdownLink>
+                                    <DropdownLink v-if="$page.props.auth.user.admin" :href="route('admin.dashboard')"> Admin </DropdownLink>
                                     <DropdownLink :href="route('logout')" method="post" as="button">
                                         Cerrar sesión
                                     </DropdownLink>
@@ -123,6 +124,7 @@ const showingNavigationDropdown = ref(false);
 
                     <div class="mt-3 space-y-1">
                         <ResponsiveNavLink :href="route('profile.edit')"> Perfil </ResponsiveNavLink>
+                        <ResponsiveNavLink v-if="$page.props.auth.user.admin" :href="route('admin.dashboard')"> Admin </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                             Cerrar sesión
                         </ResponsiveNavLink>

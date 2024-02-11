@@ -18,18 +18,28 @@ class Curso extends Model
 {
     use HasFactory;
 
+
+    const TABLE = 'cursos';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'user_id',
         'name',
         'expire_at'
     ];
 
-
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'expire_at' => 'datetime',
     ];
 
-
+    /**
+     * @var string[]
+     */
     protected $appends = [
         'joined',
         'owner'
@@ -72,7 +82,7 @@ class Curso extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $this->users()
-                ->where('role', CursoUserRoles::OWNER->value)
+                ->where('curso_user.role', CursoUserRoles::OWNER->value)
                 ->first(),
         );
     }

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enumeration\UserRoles;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
@@ -24,6 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
         'microsoft_id',
         'microsoft_token',
@@ -53,11 +56,27 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    protected $appends = [
+        'admin'
+    ];
+
     /**
      * @return BelongsToMany
      */
     public function cursos(): BelongsToMany
     {
         return $this->belongsToMany(Curso::class);
+    }
+
+
+    /**
+     * @return Attribute
+     */
+    public function admin(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => in_array($this->role, [UserRoles::ADMIN->value, UserRoles::SUPER->value]),
+        );
     }
 }
