@@ -1,9 +1,7 @@
 import './bootstrap';
-import '../css/app.css';
+import '../css/admin.css';
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createApp, h } from 'vue/dist/vue.esm-bundler';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import dayjs from 'dayjs';
 import "dayjs/locale/es";
@@ -32,7 +30,19 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 // });
 
 const app = createApp({
-    /* root component options */
+    data() {
+        return {
+            loading: false,
+            open: false,
+            userMenu: false,
+            mobileMenu: false
+        };
+    },
+    created() {
+        // this.$events.$on('loading', (loading) => {
+        //     this.loading = loading;
+        // });
+    }
 })
 
 app.mount('#app')

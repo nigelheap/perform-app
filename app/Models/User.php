@@ -4,10 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enumeration\UserRoles;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
 
@@ -69,6 +71,39 @@ class User extends Authenticatable
         return $this->belongsToMany(Curso::class);
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role): bool
+    {
+        return $this->role === $role;
+    }
+
+    /**
+     * @param array $roles
+     * @return bool
+     */
+    public function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuper(): bool
+    {
+        return $this->hasAnyRole([UserRoles::SUPER->value]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdminOrSuper(): bool
+    {
+        return $this->hasAnyRole([UserRoles::ADMIN->value, UserRoles::SUPER->value]);
+    }
 
     /**
      * @return Attribute
@@ -76,7 +111,40 @@ class User extends Authenticatable
     public function admin(): Attribute
     {
         return Attribute::make(
-            get: fn () => in_array($this->role, [UserRoles::ADMIN->value, UserRoles::SUPER->value]),
+            get: fn () => $this->isAdminOrSuper(),
         );
     }
+
+    /**
+     * @return Attribute
+     */
+    public function initials(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Str::of($this->name)->explode(' ', 2)->map(function($part){
+                return substr($part, 0, 1);
+            })->join('')
+        );
+    }
+
+
+    /**
+     * @param Builder $query
+     * @param string|null $search
+     * @return void
+     */
+    public function scopeSearch(Builder $query, ?string $search = ''): void
+    {
+        if(empty($search)){
+            return;
+        }
+
+        $query
+            ->where(function(Builder $query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhere('id', 'like', $search . '%');
+            });
+    }
+
 }

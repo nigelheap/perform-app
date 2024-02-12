@@ -48,23 +48,14 @@
 
         <x-form.section title="Settings" desc="" class="pt-8" inner-classes="sm:grid-cols-1">
             <x-form.fields.selector
-                name="accounts"
-                label="Accounts"
-                :current="old('accounts', isset($user) && $user?->accounts ? $user?->accounts->pluck('id') : [])"
-                :items="\App\Utilities\SelectValues::accounts()" />
-
-            <x-form.fields.text
-                name="additional_notification_emails"
-                label="Additional notification emails"
-                autocomplete="off"
-                desc="Comma separated eg: admin@operator.com,reception@operator.com"
-                :required="false"
-            />
-
+                name="cursos"
+                label="Cursos"
+                :current="old('cursos', isset($user) && $user?->cursos ? $user?->cursos->pluck('id') : [])"
+                :items="\App\Utilities\SelectValues::cursos()" />
 
             @super
             <x-form.fields.field name="role" label="Role">
-                @foreach(\App\Enums\UserRoles::cases() as $role)
+                @foreach(\App\Enumeration\UserRoles::cases() as $role)
                     <div class="radio">
                         <label>
                             {!! Form::radio('role', $role->value, [], [

@@ -16,7 +16,7 @@
 
         <title>{{ $pageTitle ? $pageTitle . ' - ' : '' . config('app.name', 'Console Admin') }}</title>
 
-        @vite(['resources/sass/admin.scss', 'resources/js/admin.js'])
+        @vite(['resources/css/admin.css', 'resources/js/admin.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="flex h-full" id="app">

@@ -56,32 +56,10 @@
                              :class="{'bg-gray-100' : userMenu }"
                              tabindex="-1">
 
-                            <a href="{{ route('account.edit') }}"
-                               class="block px-4 py-2 text-sm text-gray-700"
-                               role="menuitem"
-                               tabindex="-1"
-                               id="user-menu-item-0">Your Profile</a>
-
-                            @impersonating($guard = null)
-                            <a href="{{ route('impersonation.leave') }}"
-                               class="block px-4 py-2 text-sm text-gray-700"
-                               role="menuitem"
-                               tabindex="-1"
-                               id="user-menu-item-1">Leave impersonation</a>
-                            @endImpersonating
-
-
-                            <a href="{{ route('admin.tools.clear-cache') }}"
-                               class="block px-4 py-2 text-sm text-gray-700"
-                               role="menuitem"
-                               tabindex="-1"
-                               id="user-menu-item-2">Clear cache</a>
-
-
                             <a href="{{ route('logout') }}"
                                class="block px-4 py-2 text-sm text-gray-700"
                                role="menuitem"
-                               tabindex="-1" id="user-menu-item-3">Sign out</a>
+                               tabindex="-1" id="user-menu-item-3">Cerrar sesión</a>
                         </div>
                     </transition>
                 </div>

@@ -23,6 +23,11 @@ createInertiaApp({
         dayjs.locale('es')
         dayjs.extend(relativeTime)
         app.config.globalProperties.$date = dayjs;
+        app.config.globalProperties.$config = {
+            mapbox: {
+                key: 'pk.eyJ1IjoibmlnZWxoZWFwIiwiYSI6ImNsc2l2ODYwbTFrNnIydnFwbmcxd3plMDIifQ.gSiw-20dTR4w2knYpDofFg',
+            }
+        };
 
         return app.mount(el);
     },

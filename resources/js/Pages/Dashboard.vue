@@ -5,7 +5,10 @@ import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 import Avatar from "@/Components/icons/Avatar.vue";
 import UserCircle from "@/Components/Icons/UserCircle.vue";
+import { ref } from 'vue';
+import { MapboxMap } from '@studiometa/vue-mapbox-gl';
 
+const mapCenter = ref([0, 0]);
 defineProps({ cursos: Array })
 </script>
 
@@ -13,6 +16,14 @@ defineProps({ cursos: Array })
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
+
+        <MapboxMap
+            style="height: 400px"
+            :access-token="$config.mapbox.key"
+            map-style="mapbox://styles/mapbox/streets-v11"
+            :center="mapCenter"
+            :zoom="1" />
+
         <div class="py-12">
             <ul class="flex flex-col gap-4 justify-stretch mb-4">
                 <li v-for="curso in cursos" class="w-full bg-white hover:bg-stone-100 rounded-md shadow">

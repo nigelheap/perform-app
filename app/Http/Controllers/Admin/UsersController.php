@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\UserRoles;
+use App\Enumeration\UserRoles;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -15,7 +14,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use PhpOffice\PhpSpreadsheet\Exception;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UsersController extends Controller
@@ -34,8 +32,7 @@ class UsersController extends Controller
      */
     public function index(Request $request) : View|Factory|Application
     {
-        $users = User::orderBy('first_name')
-            ->withCount('accounts')
+        $users = User::orderBy('name')
             ->search($request->get('search'))
             ->paginate(50)
             ->withQueryString();
@@ -45,16 +42,6 @@ class UsersController extends Controller
         ]);
     }
 
-
-    /**
-     * @param Request $request
-     * @return BinaryFileResponse
-     * @throws Exception|\PhpOffice\PhpSpreadsheet\Writer\Exception
-     */
-    public function export(Request $request)
-    {
-        return Excel::download(new UsersExport($request), 'console-users-'.date('Y-m-d-h-i-s').'.xlsx');
-    }
 
     /**
      * @param User $user

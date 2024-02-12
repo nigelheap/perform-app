@@ -5,7 +5,6 @@
                 <x-form.fields.search />
             </x-slot:filters>
             <x-slot:buttons>
-                <x-buttons.a-secondary target="_blank" href="{{ route('admin.users.export') }}">Export Users (.xlsx)</x-buttons.a-secondary>
                 <x-buttons.a-primary href="{{ route('admin.users.create') }}">Add User</x-buttons.a-primary>
             </x-slot:buttons>
             <x-elements.table class="mb-4">
@@ -40,18 +39,14 @@
                             </span>
                         </td>
                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <x-buttons.a-primary
-                                href="{{ route('admin.users.impersonate', $user) }}"
-                                :sr-title="$user->name">Impersonate</x-buttons.a-primary>
-                            <x-buttons.a-secondary
-                                href="{{ route('admin.users.edit', $user) }}"
-                                :sr-title="$user->name">Edit</x-buttons.a-secondary>
-                            <x-buttons.a-secondary
-                                href="{{ route('admin.listings.create', ['user_id' => $user->id]) }}"
-                                :sr-title="$user->name">Create Listing</x-buttons.a-secondary>
-                            <x-buttons.a-primary
-                                href="{{ route('admin.users.show', $user) }}"
-                                :sr-title="$user->name">Show</x-buttons.a-primary>
+                            <div class="flex gap-2">
+                                <x-buttons.a-secondary
+                                    href="{{ route('admin.users.edit', $user) }}"
+                                    :sr-title="$user->name">Edit</x-buttons.a-secondary>
+                                <x-buttons.a-primary
+                                    href="{{ route('admin.users.show', $user) }}"
+                                    :sr-title="$user->name">Show</x-buttons.a-primary>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

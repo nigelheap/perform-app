@@ -10,8 +10,7 @@ import HeaderAuthed from "@/Components/HeaderAuthed.vue";
         <div class="min-h-screen bg-brand-background">
 
             <HeaderAuthed />
-
-
+            
             <!-- Page Heading -->
             <header v-if="$slots.header">
                 <div class="max-w-7xl mx-auto text-center py-6 px-4 sm:px-6 lg:px-8">

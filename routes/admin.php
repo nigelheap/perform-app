@@ -22,7 +22,6 @@ Route::resource('accounts', Admin\AccountsController::class);
 Route::get('/accounts/{account}/delete', [Admin\AccountsController::class, 'delete'])
     ->name('accounts.delete');
 
-Route::get('/users/export', [Admin\UsersController::class, 'export'])->name('users.export');
 Route::resource('users', Admin\UsersController::class);
 Route::get('/users/{user}/delete', [Admin\UsersController::class, 'delete'])->name('users.delete');
 Route::get('/users/{user}/impersonate', [Admin\UsersController::class, 'impersonate'])->name('users.impersonate');

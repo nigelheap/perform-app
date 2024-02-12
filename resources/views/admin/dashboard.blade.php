@@ -29,11 +29,11 @@
 
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <span class="inline-flex items-center rounded bg-region-night border border-region-night-dark px-1 font-sans text-white">
+                        <span class="inline-flex items-center rounded bg-brand-blue border border-region-night-dark px-1 font-sans text-white">
                             {{ $pendingUser->role }}
                         </span>
                     </td>
-                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right justify-end text-sm flex gap-2 font-medium sm:pr-6">
                         <x-buttons.a-primary href="{{ route('admin.users.accept', $pendingUser) }}" :sr-title="$pendingUser->name">Aceptar</x-buttons.a-primary>
                         <x-buttons.a-secondary href="{{ route('admin.users.reject', $pendingUser) }}" :sr-title="$pendingUser->name">Rechazar</x-buttons.a-secondary>
                     </td>
