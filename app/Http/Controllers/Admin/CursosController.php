@@ -6,6 +6,7 @@ use App\Enumeration\UserRoles;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class UsersController extends Controller
+class CursosController extends Controller
 {
     /**
      * Create the controller instance.
@@ -32,13 +33,15 @@ class UsersController extends Controller
      */
     public function index(Request $request) : View|Factory|Application
     {
-        $users = User::orderBy('name')
+        $cursos = Curso::orderBy('name')
             ->search($request->get('search'))
             ->paginate(50)
             ->withQueryString();
 
-        return view('admin.users', [
-            'users' => $users,
+        dd($cursos);
+
+        return view('admin.cursos', [
+            'cursos' => $cursos,
         ]);
     }
 
@@ -83,9 +86,9 @@ class UsersController extends Controller
             'remember_token' => Str::random(60),
         ])->save();
 
-        session()->flash('success', 'Usuario agregado');
+        session()->flash('success', 'User Added');
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.cursos.index');
     }
 
     /**
@@ -95,7 +98,7 @@ class UsersController extends Controller
      */
     public function edit(User $user, Request $request) : View|Factory|Application
     {
-        return view('admin.users.edit', [
+        return view('admin.cursos.edit', [
             'user' => $user,
         ]);
     }
@@ -119,9 +122,9 @@ class UsersController extends Controller
             ])->save();
         }
 
-        session()->flash('success', $user->name . ' actualizado');
+        session()->flash('success', $user->name . ' updated');
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.cursos.index');
     }
 
 
@@ -129,33 +132,39 @@ class UsersController extends Controller
     {
         $this->authorize('delete', $user);
 
-        return view('admin.users.delete', [
+        return view('admin.cursos.delete', [
             'user' => $user,
         ]);
     }
 
 
-    public function destroy(User $user) : RedirectResponse
+    public function destroy(Curso $curso) : RedirectResponse
     {
-        $name = $user->name;
+        $name = $curso->name;
 
-        $user->delete();
+        $curso->delete();
 
-        session()->flash('success', $name . ' eliminado');
+        session()->flash('success', $curso . ' eliminado');
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.cursos.index');
     }
 
 
-    /**
-     * @param User $user
-     * @return RedirectResponse
-     */
-    public function impersonate(User $user) : RedirectResponse
-    {
-        \Auth::user()->impersonate($user);
 
-        return redirect()->route('dashboard');
+
+    public function accept(Curso $curso, User $user) : RedirectResponse
+    {
+        $name = $user->name;
+
+        $curso->users()->updateExistingPivot($user->id, [
+            'approved' => true
+        ]);
+
+        $user->delete();
+
+        session()->flash('success', 'invitación eliminado' . $name);
+
+        return redirect()->route('admin.cursos.show', $curso);
     }
 
 

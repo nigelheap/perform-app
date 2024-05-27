@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enumeration\CursoUserRoles;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
@@ -46,6 +47,13 @@ class Curso extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $withCount = [
+        'users'
+    ];
+
+    /**
      * @return BelongsToMany
      */
     public function users(): BelongsToMany
@@ -85,5 +93,24 @@ class Curso extends Model
                 ->where('curso_user.role', CursoUserRoles::OWNER->value)
                 ->first(),
         );
+    }
+
+
+    /**
+     * @param Builder $query
+     * @param string|null $search
+     * @return void
+     */
+    public function scopeSearch(Builder $query, ?string $search = ''): void
+    {
+        if(empty($search)){
+            return;
+        }
+
+        $query
+            ->where(function(Builder $query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('id', 'like', $search . '%');
+            });
     }
 }

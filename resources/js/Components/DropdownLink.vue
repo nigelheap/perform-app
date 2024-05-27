@@ -7,7 +7,7 @@ defineProps({
         required: true,
     },
     external: {
-        type: String,
+        type: Boolean,
         required: false,
         default: false
     },

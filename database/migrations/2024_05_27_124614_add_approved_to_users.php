@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('curso_user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->boolean('approved')->default(false);
         });
     }
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('curso_user', function (Blueprint $table) {
-            $table->dropColumn('approved');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('approved')->default(false);
         });
     }
 };

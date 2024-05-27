@@ -27,6 +27,7 @@ Route::group([
     })->name('dashboard');
 
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('cursos', \App\Http\Controllers\CursosController::class);
     Route::get('cursos/{curso}/join', [\App\Http\Controllers\CursosController::class, 'join'])
         ->name('cursos.join');

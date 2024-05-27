@@ -36,6 +36,7 @@ class User extends Authenticatable
         'google_id',
         'google_token',
         'google_refresh_token',
+        'approved',
     ];
 
     /**
@@ -58,11 +59,19 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
+    /**
+     * @var string[]
+     */
     protected $appends = [
         'admin'
     ];
 
+    /**
+     * @var string[]
+     */
+    protected $withCount = [
+        'cursos'
+    ];
     /**
      * @return BelongsToMany
      */

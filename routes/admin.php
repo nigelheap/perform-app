@@ -28,6 +28,11 @@ Route::get('/users/{user}/impersonate', [Admin\UsersController::class, 'imperson
 Route::get('/users/{user}/accept', [Admin\UsersController::class, 'accept'])->name('users.accept');
 Route::get('/users/{user}/reject', [Admin\UsersController::class, 'reject'])->name('users.reject');
 
+Route::resource('cursos', Admin\CursosController::class);
+Route::get('/cursos/{curso}/delete', [Admin\CursosController::class, 'delete'])->name('cursos.delete');
+
+
+
 //Route::get('/tools/clear-cache', [Admin\ToolsController::class, 'clearCache'])->name('tools.clear-cache');
 
 //Route::controller(Admin\Settings\GeneralSettingsController::class)->group(function (){
