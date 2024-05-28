@@ -32,7 +32,8 @@ class UsersController extends Controller
      */
     public function index(Request $request) : View|Factory|Application
     {
-        $users = User::orderBy('name')
+        $users = User::withCount('cursos')
+            ->orderBy('name')
             ->search($request->get('search'))
             ->paginate(50)
             ->withQueryString();

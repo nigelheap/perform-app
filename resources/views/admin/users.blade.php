@@ -25,7 +25,7 @@
                                 <span><a href="{{ route('admin.users.show', $user) }}">{!! $user->name !!}</a></span>
                                 <span class="text-xs text-neutral-700">
                                     <span class="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">
-                                        {{ $user->cursos_count }} {{ Str::plural('account', $user->cursos_count) }}
+                                        {{ $user->cursos_count }} {{ Str::plural('curso', $user->cursos_count) }}
                                     </span>
                                 </span>
                             </div>

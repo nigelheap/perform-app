@@ -11,7 +11,7 @@
     </div>
     <button
         type="submit"
-        class="inline-flex items-center rounded-md border-gray-200 text-white bg-region-night-dark py-2 px-3 text-center text-sm font-semibold shadow-sm hover:bg-region-night-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-region-forest transition ease-in-out duration-150">
+        class="inline-flex items-center rounded-md bg-brand-orange border-gray-200 text-white bg-region-night-dark py-2 px-3 text-center text-sm font-semibold shadow-sm hover:bg-region-night-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-region-forest transition ease-in-out duration-150">
         Search
     </button>
     <a

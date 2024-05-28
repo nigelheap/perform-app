@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('curso_id');
             $table->uuid('user_id');
             $table->string('role')->default(CursoUserRoles::NORMAL->value);
+            $table->boolean('approved')->default(0);
             $table->timestamps();
 
             $table->primary(['curso_id', 'user_id']);

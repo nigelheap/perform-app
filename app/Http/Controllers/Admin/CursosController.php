@@ -33,12 +33,11 @@ class CursosController extends Controller
      */
     public function index(Request $request) : View|Factory|Application
     {
-        $cursos = Curso::orderBy('name')
+        $cursos = Curso::withCount('users')
+            ->orderBy('name')
             ->search($request->get('search'))
             ->paginate(50)
             ->withQueryString();
-
-        dd($cursos);
 
         return view('admin.cursos', [
             'cursos' => $cursos,

@@ -66,12 +66,7 @@ class User extends Authenticatable
         'admin'
     ];
 
-    /**
-     * @var string[]
-     */
-    protected $withCount = [
-        'cursos'
-    ];
+
     /**
      * @return BelongsToMany
      */

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enumeration\UserRoles;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Nigel Heap',
             'email' => 'nigel.c.heap@gmail.com',
+            'role' => UserRoles::SUPER->name,
             'password'=> Hash::make('secret'),
         ]);
     }

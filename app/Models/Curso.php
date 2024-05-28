@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @mixin IdeHelperClassSession
+ * @mixin IdeHelperCurso
  */
 class Curso extends Model
 {
@@ -46,12 +46,6 @@ class Curso extends Model
         'owner'
     ];
 
-    /**
-     * @var string[]
-     */
-    protected $withCount = [
-        'users'
-    ];
 
     /**
      * @return BelongsToMany
