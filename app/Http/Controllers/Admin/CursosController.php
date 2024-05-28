@@ -107,7 +107,10 @@ class CursosController extends Controller
         return redirect()->route('admin.cursos.index');
     }
 
-
+    /**
+     * @param Curso $curso
+     * @return View|Factory|Application
+     */
     public function delete(Curso $curso) : View|Factory|Application
     {
         $this->authorize('delete', $curso);
@@ -117,7 +120,10 @@ class CursosController extends Controller
         ]);
     }
 
-
+    /**
+     * @param Curso $curso
+     * @return RedirectResponse
+     */
     public function destroy(Curso $curso) : RedirectResponse
     {
         $name = $curso->name;
@@ -129,9 +135,11 @@ class CursosController extends Controller
         return redirect()->route('admin.cursos.index');
     }
 
-
-
-
+    /**
+     * @param Curso $curso
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function accept(Curso $curso, User $user) : RedirectResponse
     {
         $name = $user->name;
@@ -147,7 +155,11 @@ class CursosController extends Controller
         return redirect()->route('admin.cursos.show', $curso);
     }
 
-
+    /**
+     * @param Curso $curso
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function reject(Curso $curso, User $user) : RedirectResponse
     {
         $name = $user->name;
