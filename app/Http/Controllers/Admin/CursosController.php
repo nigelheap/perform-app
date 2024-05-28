@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enumeration\UserRoles;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CursoRequest;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\Curso;
 use App\Models\User;
@@ -46,13 +47,13 @@ class CursosController extends Controller
 
 
     /**
-     * @param User $user
+     * @param Curso $curso
      * @return Application|Factory|View
      */
-    public function show(User $user) : View|Factory|Application
+    public function show(Curso $curso) : View|Factory|Application
     {
-        return view('admin.users.show', [
-            'user' => $user
+        return view('admin.cursos.show', [
+            'curso' => $curso
         ]);
     }
 
@@ -62,77 +63,57 @@ class CursosController extends Controller
      */
     public function create(Request $request) : View|Factory|Application
     {
-        return view('admin.users.create');
+        return view('admin.cursos.create');
     }
 
     /**
-     * @param UserRequest $request
+     * @param CursoRequest $request
      * @return RedirectResponse
      */
-    public function store(UserRequest $request) : RedirectResponse
+    public function store(CursoRequest $request) : RedirectResponse
     {
-        $data = $request->except(['password_confirmation']);
-        $data['password'] = Hash::make($data['password']);
 
-        if(!$request->user()->isSuper()){
-            $data['role'] = UserRoles::USER->value;
-        }
-
-        $user = new User($data);
+        $user = new Curso($request->all());
         $user->save();
-        $user->accounts()->sync($request->get('accounts'));
-        $user->forceFill([
-            'remember_token' => Str::random(60),
-        ])->save();
 
-        session()->flash('success', 'User Added');
+        session()->flash('success', 'Curso añadido');
 
         return redirect()->route('admin.cursos.index');
     }
 
     /**
-     * @param User $user
+     * @param Curso $curso
      * @param Request $request
      * @return View|Factory|Application
      */
-    public function edit(User $user, Request $request) : View|Factory|Application
+    public function edit(Curso $curso, Request $request) : View|Factory|Application
     {
         return view('admin.cursos.edit', [
-            'user' => $user,
+            'curso' => $curso,
         ]);
     }
 
     /**
-     * @param User $user
-     * @param UserRequest $request
+     * @param Curso $curso
+     * @param CursoRequest $request
      * @return RedirectResponse
      */
-    public function update(User $user, UserRequest $request) : RedirectResponse
+    public function update(Curso $curso, CursoRequest $request) : RedirectResponse
     {
-        $data = $request->except(['password', 'password_confirmation']);
-        $user->update($data);
+        $curso->update($request->all());
 
-        $user->accounts()->sync($request->get('accounts'));
-
-        if($request->has('password')){
-            $user->forceFill([
-                'password' => Hash::make($request->get('password')),
-                'remember_token' => Str::random(60),
-            ])->save();
-        }
-
-        session()->flash('success', $user->name . ' updated');
+        session()->flash('success', $curso->name . ' actualizado');
 
         return redirect()->route('admin.cursos.index');
     }
 
 
-    public function delete(User $user) : View|Factory|Application
+    public function delete(Curso $curso) : View|Factory|Application
     {
-        $this->authorize('delete', $user);
+        $this->authorize('delete', $curso);
 
         return view('admin.cursos.delete', [
-            'user' => $user,
+            'curso' => $curso,
         ]);
     }
 
@@ -143,7 +124,7 @@ class CursosController extends Controller
 
         $curso->delete();
 
-        session()->flash('success', $curso . ' eliminado');
+        session()->flash('success', $name . ' eliminado');
 
         return redirect()->route('admin.cursos.index');
     }
@@ -161,10 +142,23 @@ class CursosController extends Controller
 
         $user->delete();
 
-        session()->flash('success', 'invitación eliminado' . $name);
+        session()->flash('success', 'invitación aceptado' . $name);
 
         return redirect()->route('admin.cursos.show', $curso);
     }
 
+
+    public function reject(Curso $curso, User $user) : RedirectResponse
+    {
+        $name = $user->name;
+
+        $curso->users()->detach($curso->id);
+
+        $user->delete();
+
+        session()->flash('success', 'invitación eliminado' . $name);
+
+        return redirect()->route('admin.cursos.show', $curso);
+    }
 
 }
