@@ -1,5 +1,5 @@
 import './bootstrap';
-import '../css/admin.css';
+// import '../css/admin.css';
 
 import { createApp, h } from 'vue/dist/vue.esm-bundler';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
