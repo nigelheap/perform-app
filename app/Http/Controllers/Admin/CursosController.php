@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enumeration\UserRoles;
-use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CursoRequest;
-use App\Http\Requests\Admin\UserRequest;
 use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -14,9 +11,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CursosController extends Controller
 {
@@ -25,7 +19,7 @@ class CursosController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'user');
+        $this->authorizeResource(Curso::class, 'curso');
     }
 
     /**

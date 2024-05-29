@@ -18,25 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
 
 
-Route::resource('accounts', Admin\AccountsController::class);
-Route::get('/accounts/{account}/delete', [Admin\AccountsController::class, 'delete'])
-    ->name('accounts.delete');
-
 Route::resource('users', Admin\UsersController::class);
 Route::get('/users/{user}/delete', [Admin\UsersController::class, 'delete'])->name('users.delete');
 Route::get('/users/{user}/impersonate', [Admin\UsersController::class, 'impersonate'])->name('users.impersonate');
-Route::get('/users/{user}/accept', [Admin\UsersController::class, 'accept'])->name('users.accept');
-Route::get('/users/{user}/reject', [Admin\UsersController::class, 'reject'])->name('users.reject');
+
 
 Route::resource('cursos', Admin\CursosController::class);
 Route::get('/cursos/{curso}/delete', [Admin\CursosController::class, 'delete'])->name('cursos.delete');
+Route::get('/cursos/{curso}/users/{user}/accept', [Admin\UsersController::class, 'accept'])->name('cursos.users.accept');
+Route::get('/cursos/{curso}/users/{user}/reject', [Admin\UsersController::class, 'reject'])->name('cursos.users.reject');
 
 
-
-//Route::get('/tools/clear-cache', [Admin\ToolsController::class, 'clearCache'])->name('tools.clear-cache');
-
-//Route::controller(Admin\Settings\GeneralSettingsController::class)->group(function (){
-//    Route::get('/settings', 'index')->name('settings.general');
-//    Route::post('/settings', 'save')->name('settings.general.save');
-//});
+Route::controller(Admin\Settings\GeneralSettingsController::class)->group(function (){
+    Route::get('/settings', 'index')->name('settings.general');
+    Route::post('/settings', 'save')->name('settings.general.save');
+});
 

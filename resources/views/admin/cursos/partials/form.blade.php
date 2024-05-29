@@ -11,21 +11,16 @@
                 :required="true"
             />
 
-        </x-form.section>
-
-        <x-form.section
-            title="Details"
-            desc=""
-            class="pt-8">
-
             <x-form.fields.datepicker
                 name="expire_at"
                 label="Fecha de entrega"
+                :value="old('expire_at', isset($curso) ? $curso->expire_at->format('Y-m-d') : '')"
                 autocomplete="off"
                 :required="false"
             />
 
         </x-form.section>
+
 
     </div>
     <x-slot:footer>

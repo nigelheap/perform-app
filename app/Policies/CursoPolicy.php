@@ -2,12 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Account;
+use App\Enums\UserRoles;
+use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class AccountPolicy
+class CursoPolicy
 {
+
     /**
      * Determine whether the user can view any models.
      */
@@ -19,9 +21,11 @@ class AccountPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Account $account): bool
+    public function view(User $user, Curso $curso): bool
     {
-        if(in_array($account->id, $user->accounts()->pluck('id')->toArray())){
+
+        if($curso->whereRelation('users', 'id', $user->id)
+            ->exists()){
             return true;
         }
 
@@ -39,15 +43,15 @@ class AccountPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Account $account): bool
+    public function update(User $user, Curso $curso): bool
     {
-        return $this->view($user, $account);
+        return $this->view($user, $curso);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Account $account): bool
+    public function delete(User $user, Curso $curso): bool
     {
         return $this->viewAny($user);
     }
@@ -55,7 +59,7 @@ class AccountPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Account $account): bool
+    public function restore(User $user, Curso $curso): bool
     {
         return $this->viewAny($user);
     }
@@ -63,7 +67,7 @@ class AccountPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Account $account): bool
+    public function forceDelete(User $user, Curso $curso): bool
     {
         return $this->viewAny($user);
     }
