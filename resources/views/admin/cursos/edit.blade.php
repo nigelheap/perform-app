@@ -1,18 +1,18 @@
 <x-layouts.admin>
     <x-slot:title>
-        Edit: <a href="{{ route('admin.users.show', $user->id) }}">{{ $user->name }}</a>
+        Editar: <a href="{{ route('admin.cursos.show', $curso->id) }}">{{ $curso->name }}</a>
     </x-slot:title>
 
-    {!! Form::model($user, [
-        'route' => ['admin.users.update', $user->id],
+    {!! Form::model($curso, [
+        'route' => ['admin.cursos.update', $curso->id],
         'method' => 'PATCH',
         'files' => true,
         'autocomplete' => 'off'
     ]) !!}
 
-    @include('admin.users.partials.form', [
-        'submitButtonText' => 'Save User',
-        'deleteLink' => route('admin.users.delete', $user->id)
+    @include('admin.cursos.partials.form', [
+        'submitButtonText' => 'Guarda curso',
+        'deleteLink' => route('admin.cursos.delete', $curso->id)
     ])
 
     {!! Form::close() !!}

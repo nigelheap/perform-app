@@ -1,11 +1,11 @@
 <x-layouts.admin>
     <x-slot:title>
-        Add user
+        Crear curso
     </x-slot:title>
     {!! Form::open([
-            'route' => 'admin.users.store',
+            'route' => 'admin.cursos.store',
             'files' => true,
         ]) !!}
-    @include('admin.users.partials.form', ['submitButtonText' => 'Create User'])
+    @include('admin.cursos.partials.form', ['submitButtonText' => 'Crear curso'])
     {!! Form::close() !!}
 </x-layouts.admin>
