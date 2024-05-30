@@ -14,7 +14,13 @@ return new class extends Migration
     {
         Schema::create('curso_user', function (Blueprint $table) {
             $table->uuid('curso_id');
+            $table->foreign('curso_id')
+                ->references('id')->on('users');
+
             $table->uuid('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users');
+
             $table->string('role')->default(CursoUserRoles::NORMAL->value);
             $table->boolean('approved')->default(0);
             $table->timestamps();
